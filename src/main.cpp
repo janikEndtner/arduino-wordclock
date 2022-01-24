@@ -5,15 +5,13 @@
 
 
 RTC_DS1307 rtc;
+auto board = new Board;
+DateTime dateTime;
 
 void setup() {
     delay(3000); // power-up safety delay
-    auto board = new Board;
     board->setBrightness(20);
     board->init();
-    board->clearAllLeds();
-    board->setFirstLed();
-    board->show();
 
     Serial.begin(9600);
     if (!rtc.begin()) {
@@ -28,7 +26,19 @@ void setup() {
     }
 }
 
+int hour = 0;
+
 void loop() {
+    hour++;
+    board->clearAllLeds();
+    board->turnOnLightsForHour(hour);
+//    board->turnOnLightsForMinute(dateTime.minute());
+    board->show();
+    if (hour == 12) {
+        hour = 0;
+    }
+    delay(1000);
+
     DateTime now = rtc.now();
 //    for (int i = 0; i < NUM_LEDS; ++i) {
 //        leds[i] = LED_COLOR;

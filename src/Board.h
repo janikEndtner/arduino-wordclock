@@ -13,13 +13,16 @@ public:
     static const int NUM_LEDS = 144;
     void init();
     CRGB *getLeds();
-    void setFirstLed();
     void clearAllLeds();
     void setBrightness(int brightness);
     void show();
 
+    void turnOnLightsForMinute(uint8_t i);
+    void turnOnLightsForHour(uint8_t hour);
+
 private:
     CRGB leds[NUM_LEDS];
+    void turnOnLeds(const int* indexes, int arraySize);
 };
 
 
