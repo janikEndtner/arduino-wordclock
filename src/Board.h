@@ -11,9 +11,12 @@
 class Board {
 public:
     static const int NUM_LEDS = 144;
+    void init();
     CRGB *getLeds();
     void setFirstLed();
     void clearAllLeds();
+    void setBrightness(int brightness);
+    void show();
 
 private:
     CRGB leds[NUM_LEDS];

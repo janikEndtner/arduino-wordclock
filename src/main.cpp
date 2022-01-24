@@ -1,27 +1,19 @@
 #include <Arduino.h>
 #include "../.pio/libdeps/uno/RTClib/src/RTClib.h"
-#include "../.pio/libdeps/uno/FastLED/src/FastLED.h"
 #include <Wire.h>
 #include "Board.h"
 
 
 RTC_DS1307 rtc;
 
-#define LED_PIN     5
-#define BRIGHTNESS  20
-#define LED_TYPE    WS2812
-#define COLOR_ORDER GRB
-#define LED_COLOR CRGB::White
-
-
 void setup() {
     delay(3000); // power-up safety delay
     auto board = new Board;
-    FastLED.addLeds<LED_TYPE, LED_PIN, COLOR_ORDER>(board->getLeds(), Board::NUM_LEDS).setCorrection(TypicalLEDStrip);
-    FastLED.setBrightness(BRIGHTNESS);
+    board->setBrightness(20);
+    board->init();
     board->clearAllLeds();
     board->setFirstLed();
-    FastLED.show();
+    board->show();
 
     Serial.begin(9600);
     if (!rtc.begin()) {
