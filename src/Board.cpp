@@ -33,62 +33,62 @@ void Board::show() {
 void Board::turnOnLightsForHour(uint8_t hour) {
     switch (hour) {
         case 1: {
-            int indexes[3] = {61, 62, 63};
+            int indexes[3] = {60, 61, 62};
             this->turnOnLeds(indexes, 3);
             break;
         }
         case 2: {
-            int indexes[4] = {100, 101, 102, 103};
+            int indexes[4] = {99, 100, 101, 102};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 3: {
-            int indexes[4] = {117, 118, 119, 120};
+            int indexes[4] = {116, 117, 118, 119};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 4: {
-            int indexes[4] = {90, 91, 92, 93};
+            int indexes[4] = {89, 90, 91, 92};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 5: {
-            int indexes[4] = {133, 134, 135, 136};
+            int indexes[4] = {132, 133, 134, 135};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 6: {
-            int indexes[4] = {63, 64, 65, 66};
+            int indexes[4] = {62, 63, 64, 65};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 7: {
-            int indexes[5] = {67, 68, 69, 70, 71};
+            int indexes[5] = {66, 67, 68, 69, 70};
             this->turnOnLeds(indexes, 5);
             break;
         }
         case 8: {
-            int indexes[5] = {85, 86, 87, 88, 89};
+            int indexes[5] = {84, 85, 86, 87, 88};
             this->turnOnLeds(indexes, 5);
             break;
         }
         case 9: {
-            int indexes[4] = {138, 139, 140, 141};
+            int indexes[4] = {137, 138, 139, 140};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 10: {
-            int indexes[4] = {109, 110, 111, 112};
+            int indexes[4] = {108, 109, 110, 111};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 11: {
-            int indexes[4] = {117, 118, 119, 120};
+            int indexes[4] = {116, 117, 118, 119};
             this->turnOnLeds(indexes, 4);
             break;
         }
         case 12: {
-            int indexes[6] = {79, 80, 81, 82, 83, 84};
+            int indexes[6] = {78, 79, 80, 81, 82, 83};
             this->turnOnLeds(indexes, 6);
             break;
         }
