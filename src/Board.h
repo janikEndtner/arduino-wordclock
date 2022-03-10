@@ -10,15 +10,19 @@
 
 class Board {
 public:
-    static const int NUM_LEDS = 144;
+    static const int NUM_LEDS = 148;
     void init();
     CRGB *getLeds();
     void clearAllLeds();
     void setBrightness(int brightness);
     void show();
 
-    void turnOnLightsForMinute(uint8_t i);
-    void turnOnLightsForHour(uint8_t hour);
+    void turnOnLightsForMinutes(int minutes);
+    void turnOnLightsForHour(int hour);
+
+    void turnOnLightsForRest(int i);
+
+    void turnOnDefaultLights();
 
 private:
     CRGB leds[NUM_LEDS];
