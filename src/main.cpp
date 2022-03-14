@@ -8,11 +8,14 @@ RTC_DS1307 rtc;
 auto board = new Board;
 DateTime dateTime;
 
+int minBrightness = 20;
+int maxBrightness = 100;
+
 int roundDownToFive(int number);
+void calculateAndSetBrightness();
 
 void setup() {
     delay(3000); // power-up safety delay
-    board->setBrightness(20);
     board->init();
 
     Serial.begin(9600);
@@ -57,6 +60,9 @@ void loop() {
     board->turnOnLightsForHour(hour);
     board->turnOnLightsForMinutes(minuteRounded);
     board->turnOnLightsForRest(rest);
+
+    calculateAndSetBrightness();
+
     board->show();
 
     delay(200);
@@ -72,4 +78,11 @@ void loop() {
 
 int roundDownToFive(int number) {
     return (number/5) * 5;
+}
+
+void calculateAndSetBrightness() {
+    float analogValue = analogRead(A0);
+    float percentage = analogValue / 1024;
+    float brightness = minBrightness + (maxBrightness - minBrightness) * percentage;
+    board->setBrightness((int) brightness);
 }
