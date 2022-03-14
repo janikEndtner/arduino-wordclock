@@ -6,10 +6,11 @@
 
 RTC_DS1307 rtc;
 auto board = new Board;
-DateTime dateTime;
 
 int minBrightness = 20;
 int maxBrightness = 100;
+// we get max 1024 from input. set this value to reach 100% brightness earlier
+int brightestAtXBit = 800;
 
 int roundDownToFive(int number);
 void calculateAndSetBrightness();
@@ -31,29 +32,18 @@ void setup() {
     }
 }
 
-int hour = 1;
-int minute = 0;
-
 void loop() {
-    minute++;
-    //    X:25 => "füf vor haubi X+1"
+
+    DateTime now = rtc.now();
+    int hour = now.hour();
+    int minute = now.minute();
+    Serial.println(now.timestamp());
+
     int minuteRounded = roundDownToFive(minute);
     int rest = minute - minuteRounded;
-    if (minute == 25) {
+    if (minute >= 25) {
         hour++;
     }
-    if (minute == 60) {
-        minute = 0;
-    }
-    if (hour == 13) {
-        hour = 1;
-    }
-    Serial.print(hour);
-    Serial.print(":");
-    Serial.print(minuteRounded);
-    Serial.print(" rest:");
-    Serial.print(rest);
-    Serial.print("\n");
 
     board->clearAllLeds();
     board->turnOnDefaultLights();
@@ -65,15 +55,7 @@ void loop() {
 
     board->show();
 
-    delay(200);
-
-//    DateTime now = rtc.now();
-//    for (int i = 0; i < NUM_LEDS; ++i) {
-//        leds[i] = LED_COLOR;
-//        FastLED.show();
-//        delay(100);
-//        leds[i] = CRGB::Black;
-//    }
+    delay(1000);
 }
 
 int roundDownToFive(int number) {
@@ -82,7 +64,10 @@ int roundDownToFive(int number) {
 
 void calculateAndSetBrightness() {
     float analogValue = analogRead(A0);
-    float percentage = analogValue / 1024;
+    float percentage = analogValue / brightestAtXBit;
     float brightness = minBrightness + (maxBrightness - minBrightness) * percentage;
+    brightness = min(100, brightness);
+    Serial.print("Brightness: ");
+    Serial.println(brightness);
     board->setBrightness((int) brightness);
 }

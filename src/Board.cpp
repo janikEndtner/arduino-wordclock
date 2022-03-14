@@ -31,6 +31,10 @@ void Board::show() {
 }
 
 void Board::turnOnLightsForHour(int hour) {
+    // 24 hours format to 12 hours
+    if (hour > 12) {
+        hour = hour - 12;
+    }
     switch (hour) {
         case 1: {
             int indexes[3] = {60, 61, 62};
@@ -182,7 +186,6 @@ void Board::turnOnLeds(const int* indexes, int arraySize) {
 
 void Board::turnOnLightsForRest(int i) {
     if (i >= 1) {
-        Serial.print(i);
         leds[144] = CRGB::White;
     }
     if (i >= 2) {
