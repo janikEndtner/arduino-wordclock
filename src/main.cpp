@@ -24,11 +24,11 @@ void setup() {
         Serial.println("Couldn't find RTC");
     }
     if (!rtc.isrunning()) {
-        Serial.println("RTC is NOT running!");
+        Serial.println("RTC is NOT running! Setting initial time...");
+        rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
     }
     if (rtc.isrunning()){
-        Serial.println("RTC is running. Setting initial time...");
-        rtc.adjust(DateTime(F(__DATE__), F(__TIME__)));
+        Serial.println("RTC is running.");
     }
 }
 
