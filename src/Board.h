@@ -26,6 +26,7 @@ public:
 
 private:
     CRGB leds[NUM_LEDS];
+    CRGB color;
     void turnOnLeds(const int* indexes, int arraySize);
 };
 

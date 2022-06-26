@@ -8,7 +8,8 @@
 #define COLOR_ORDER GRB
 
 void Board::init() {
-    const int letPin = 5;
+    const int letPin = 6;
+    color = 0x818853;
     FastLED.addLeds<LED_TYPE, letPin, COLOR_ORDER>(this->getLeds(), Board::NUM_LEDS).setCorrection(TypicalLEDStrip);
 }
 
@@ -180,22 +181,22 @@ void Board::turnOnLightsForMinutes(int minutes) {
 
 void Board::turnOnLeds(const int* indexes, int arraySize) {
     for (int i = 0; i < arraySize; ++i) {
-        this->leds[indexes[i]] = CRGB::White;
+        this->leds[indexes[i]] = color;
     }
 }
 
 void Board::turnOnLightsForRest(int i) {
     if (i >= 1) {
-        leds[144] = CRGB::White;
+        leds[144] = color;
     }
     if (i >= 2) {
-        leds[145] = CRGB::White;
+        leds[145] = color;
     }
     if (i >= 3) {
-        leds[146] = CRGB::White;
+        leds[146] = color;
     }
     if (i == 4) {
-        leds[147] = CRGB::White;
+        leds[147] = color;
     }
 }
 
