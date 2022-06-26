@@ -205,3 +205,8 @@ void Board::turnOnDefaultLights() {
     int indexes[6] = {1, 2, 4, 5, 6, 7};
     this->turnOnLeds(indexes, 6);
 }
+
+void Board::turnOnHappyBirthdayLeds() {
+    int indexes[12] = {7, 19, 31, 43, 55, 68, 80, 92, 104, 116, 128, 140};
+    this->turnOnLeds(indexes, 12);
+}

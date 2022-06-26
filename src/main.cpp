@@ -16,9 +16,15 @@ int previousBrightness;
 int brightnessChanges = 0;
 bool summerTime = false;
 
+DateTime birthdays[2] = {
+        DateTime(1989, 01, 13, 0, 0, 0),
+        DateTime(1993, 05, 17, 0, 0, 0)
+};
+
 int roundDownToFive(int number);
 int calculateBrightness();
 void calculateSummerTime(int second, int brightness);
+bool isHappyBirthday(DateTime* now);
 
 void setup() {
     delay(3000); // power-up safety delay
@@ -56,10 +62,14 @@ void loop() {
     }
 
     board->clearAllLeds();
-    board->turnOnDefaultLights();
-    board->turnOnLightsForHour(hour);
-    board->turnOnLightsForMinutes(minuteRounded);
-    board->turnOnLightsForRest(rest);
+    if (isHappyBirthday(&now)) {
+        board->turnOnHappyBirthdayLeds();
+    } else {
+        board->turnOnDefaultLights();
+        board->turnOnLightsForHour(hour);
+        board->turnOnLightsForMinutes(minuteRounded);
+        board->turnOnLightsForRest(rest);
+    }
 
     int brightness = calculateBrightness();
     board->setBrightness(brightness);
@@ -106,4 +116,14 @@ void calculateSummerTime(int second, int brightness) {
         summerTime = !summerTime;
         brightnessChanges = 0;
     }
+}
+
+bool isHappyBirthday(DateTime* now) {
+    for (const DateTime& birthday : birthdays) {
+        bool sameMonthAndDay = now->day() == birthday.day() && now->month() == birthday.month();
+        if (sameMonthAndDay) {
+            return true;
+        }
+    }
+    return false;
 }

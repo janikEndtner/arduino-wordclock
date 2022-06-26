@@ -23,6 +23,7 @@ public:
     void turnOnLightsForRest(int i);
 
     void turnOnDefaultLights();
+    void turnOnHappyBirthdayLeds();
 
 private:
     CRGB leds[NUM_LEDS];
